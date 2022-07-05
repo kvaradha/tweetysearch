@@ -17,7 +17,7 @@ public class TweetySearchService {
 	
 	public List<TwitterSearch> getTwitterSearch(String keyword, int pageIndex, int noOfRows) {
 		Pageable pagination = PageRequest.of(pageIndex, noOfRows);
-		return tweetySearchRepo.findTweets(keyword, pagination);
+		return tweetySearchRepo.findTweets("#" + keyword, pagination);
 	}
 	
 	public void updateFavourite(Long tweetID) {
