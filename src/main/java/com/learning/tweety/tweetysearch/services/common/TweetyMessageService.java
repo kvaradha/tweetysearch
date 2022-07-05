@@ -70,6 +70,7 @@ public class TweetyMessageService {
 		TweetyMessages message = tweetyMessagesRepo.findById(tweetyID).get();
 		message.setRetweetCount(message.getRetweetCount() + 1);
 		tweetyMessagesRepo.save(message);
+		tweetSearchService.updateRetweet(tweetyID);
 	}
 	
 	@Transactional
@@ -79,6 +80,7 @@ public class TweetyMessageService {
 		TweetyMessages message = tweetyMessagesRepo.findById(tweetyID).get();
 		message.setRetweetCount(message.getRetweetCount() - 1);
 		tweetyMessagesRepo.save(message);
+		tweetSearchService.removeRetweet(tweetyID);
 	}
 	
 	@Transactional
@@ -88,6 +90,7 @@ public class TweetyMessageService {
 		TweetyMessages message = tweetyMessagesRepo.findById(tweetyID).get();
 		message.setFavouriteCount(message.getFavouriteCount() + 1);
 		tweetyMessagesRepo.save(message);
+		tweetSearchService.updateFavourite(tweetyID);
 	}
 	
 	@Transactional
@@ -97,6 +100,7 @@ public class TweetyMessageService {
 		TweetyMessages message = tweetyMessagesRepo.findById(tweetyID).get();
 		message.setFavouriteCount(message.getFavouriteCount() - 1);
 		tweetyMessagesRepo.save(message);
+		tweetSearchService.removeFavourite(tweetyID);
 	}
 }
 

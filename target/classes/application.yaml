@@ -36,7 +36,7 @@ spring:
      clientid: microservices
      clientsecret: microservices@1234
   env:
-     name: twittersearch_dep
+     name: twittersearch_prod
   threadPool:
      corePoolSize: 2
      maxPoolSize: 1000

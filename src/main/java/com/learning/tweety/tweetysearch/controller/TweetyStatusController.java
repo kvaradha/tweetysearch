@@ -8,26 +8,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.learning.tweety.tweetysearch.repository.TwitterSearch;
-import com.learning.tweety.tweetysearch.services.common.TweetySearchService;
+import com.learning.tweety.tweetysearch.repository.TweetyMessages;
+import com.learning.tweety.tweetysearch.services.common.TweetyMessageService;
 import com.learning.tweety.tweetysearch.services.token.JWTTokenService;
 
 @RestController
 @RequestMapping("/tweetysearch/status")
 public class TweetyStatusController {
 	@Autowired
-	TweetySearchService tweetySearchService;
+	TweetyMessageService tweetyMessageService;
 	
 	@Autowired
 	JWTTokenService jwtTokenService;
 	
 	@GetMapping("/getMessage/{userName}/{pageIndex}/{noOfRows}")
-	public List<TwitterSearch> getTwittyMessage(@RequestHeader("Authorization") String token,
+	public List<TweetyMessages> getTwittyMessage(@RequestHeader("Authorization") String token,
 			@PathVariable String userName, 
 			@PathVariable int pageIndex,
 			@PathVariable int noOfRows) {
 		jwtTokenService.isValidUser(token, userName);
-		return tweetySearchService.getProfileTweetyMessage(userName, pageIndex, noOfRows);
+		return tweetyMessageService.getProfileTweetyMessage(userName, pageIndex, noOfRows);
 	}
 }

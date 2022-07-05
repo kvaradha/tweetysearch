@@ -19,4 +19,7 @@ public interface TweetySearchRepository extends CrudRepository<TwitterSearch, Lo
 	@Modifying
 	@Transactional
 	void deleteTweetyMessage(Long tweetID);
+	
+	@Query(value = "select * from twittersearch where twittermessages_id = ?1", nativeQuery = true)
+	List<TwitterSearch> findTweet(Long tweetyID);
 }

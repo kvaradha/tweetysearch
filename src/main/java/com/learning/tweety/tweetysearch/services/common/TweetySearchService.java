@@ -15,9 +15,41 @@ public class TweetySearchService {
 	@Autowired
 	TweetySearchRepository tweetySearchRepo;
 	
-	public List<TwitterSearch> getProfileTweetyMessage(String keyword, int pageIndex, int noOfRows) {
+	public List<TwitterSearch> getTwitterSearch(String keyword, int pageIndex, int noOfRows) {
 		Pageable pagination = PageRequest.of(pageIndex, noOfRows);
 		return tweetySearchRepo.findTweets(keyword, pagination);
+	}
+	
+	public void updateFavourite(Long tweetID) {
+		List<TwitterSearch> messages = tweetySearchRepo.findTweet(tweetID);
+		for(TwitterSearch message : messages) {
+			message.setFavouriteCount(message.getFavouriteCount() + 1);
+			tweetySearchRepo.save(message);
+		}
+	}
+	
+	public void removeFavourite(Long tweetID) {
+		List<TwitterSearch> messages = tweetySearchRepo.findTweet(tweetID);
+		for(TwitterSearch message : messages) {
+			message.setFavouriteCount(message.getFavouriteCount() - 1);
+			tweetySearchRepo.save(message);
+		}
+	}
+	
+	public void updateRetweet(Long tweetID) {
+		List<TwitterSearch> messages = tweetySearchRepo.findTweet(tweetID);
+		for(TwitterSearch message : messages) {
+			message.setRetweetCount(message.getRetweetCount() + 1);
+			tweetySearchRepo.save(message);
+		}
+	}
+	
+	public void removeRetweet(Long tweetID) {
+		List<TwitterSearch> messages = tweetySearchRepo.findTweet(tweetID);
+		for(TwitterSearch message : messages) {
+			message.setRetweetCount(message.getRetweetCount() - 1);
+			tweetySearchRepo.save(message);
+		}
 	}
 	
 	public void createSearchMessage(TwitterSearch message) {
