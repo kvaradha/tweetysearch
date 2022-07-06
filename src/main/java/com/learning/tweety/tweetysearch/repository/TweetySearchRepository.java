@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface TweetySearchRepository extends CrudRepository<TwitterSearch, Long> {
 
-	@Query(value = "select * from twittersearch where tweetkeyword = ?1 order by created desc", nativeQuery = true)
+	@Query(value = "select * from twittersearch where tweetkeyword = ?1 order by twittersearch_id desc", nativeQuery = true)
 	List<TwitterSearch> findTweets(String keyword, Pageable pageable);
 	
 	@Query(value = "delete from twittersearch where twittermessages_id = ?1", nativeQuery = true)
